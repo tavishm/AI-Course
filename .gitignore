@@ -32,13 +32,3 @@
 *.bak
 *.tmp
 *.swp
-
-# Keep desired files
-!*.tex
-!*.pdf
-!*.ipynb
-!*.png
-!*.jpg
-!*.jpeg
-!*.svg
-!*.gif
