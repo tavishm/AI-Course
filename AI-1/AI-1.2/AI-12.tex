@@ -14,7 +14,7 @@
 \geometry{margin=1in}
 
 % Document info
-\title{AI 1.1: The Neuron and Backpropagation}
+\title{AI 1.2: Dense Neural Networks}
 \author{Tavish Mankash}
 \date{}
 
@@ -71,7 +71,7 @@ The output of the second neuron is given by:
 \]
 The output of the second neuron can be expressed as:
 \[
-    Y_2 = W_2 \cdot (W_1 \cdot X + b_1) + B_2
+    Y_2 = W_2 \cdot (W_1 \cdot X + B_1) + B_2
 \]
 Which simplifies to:
 \[
@@ -127,12 +127,12 @@ Right now, it would be important for you to understand that almost any problem, 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.55\textwidth]{../figs/Neuron_Diagram.jpg}
-    \caption{Biological Neurons.}
+    \caption{Biological neurons.}
     \label{fig:biulogical_neurons}
 \end{figure}
-A biological neuron is connected to multiple neurons. The distance between two neurons is variable. If the distance is small, the signal is strong. If the distance is large, the signal is weak. The signal is passed from one neuron to another through synapses. The synapse can be thought of as a weight. The synapse can be thought of as a weight. The synapse can be thought of as a weight. The synapse can be thought of as a weight.
+A biological neuron is connected to multiple neurons. The distance between two neurons is variable. If the distance is small, the signal is strong. If the distance is large, the signal is weak. The signal is passed from one neuron to another through synapses. The synapse can be thought of as a weight.
 
-Therefore, a true neuron takes inputs from multiple sources and has seperate weights for each. Additionally, a neuron has a single bias and a single output.
+Therefore, a true neuron takes inputs from multiple sources and has separate weights for each. Additionally, a neuron has a single bias and a single output.
 \subsection{Mathematical Representation}
 \begin{figure}[ht]
     \centering
@@ -216,7 +216,7 @@ Y_{pre-activation} = \begin{bmatrix}
 \[
 Y = f(Y_{pre-activation})
 \]
-We find that this is equivalent as calculating Y for each sample seperately. With this method, we were able to compute the output of 5 training samples all at once, with a single multiplication. Additionally, matrix multiplications are very efficient on GPUs. This is why we've been representing neurons with matrices.
+We find that this is equivalent as calculating Y for each sample separately. With this method, we were able to compute the output of 5 training samples all at once, with a single multiplication. Additionally, matrix multiplications are very efficient on GPUs. This is why we've been representing neurons with matrices.
 
 \section{Dense Neural Network}
 \subsection{Single Layer Network}
@@ -231,7 +231,7 @@ Additionally, instead of using tanh for our output neurons, we will use the soft
     \text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{n} e^{x_j}}
 \]
 Where $x_i$ is the output of the neuron, and $n$ is the number of output neurons. The softmax function will ensure that the output neurons are between 0 and 1, and that they sum to 1.
-The softmax function is used to convert the output of the neuron into a probability distribution. This is important because we want to predict the digit with the highest probability. Though tanh will also put numbers between 0 and 1, it will not ensure that they sum to 1. 
+The softmax function is used to convert the output of the neuron into a probability distribution. This is important because we want to predict the digit with the highest probability. The tanh function maps inputs to the range (-1, 1), which doesn't give us a proper probability distribution like softmax does.
 
 \textbf{Example:} Let's take a simpler example of 5 inputs and 2 possible outputs.
 \begin{figure}[ht]
@@ -405,7 +405,7 @@ $W_1$ corresponds to the weights for the hidden layer, and $W_2$ corresponds to 
 \section{Practical Problems and Concluding Remarks}
 \begin{itemize}
     \item We have only discussed the forward pass of this network as of yet. The backward pass will be manually calculated in AI 1.4.
-    \item Dense Neural Neworks are mathematially capable of solving very complex problems. However, in practice, they struggle in finding the best solution. They get stuck at local minimas. 
+    \item Dense Neural Networks are mathematically capable of solving very complex problems. However, in practice, they struggle in finding the best solution. They get stuck at local minima.
     \item These models, along with most models in modern AI, are trained once on known samples, and then used for inference. Unfortunately, it is not possible for these models to learn on their own, without many labels like humans do. Neither are they capable of learning while in inference and updating their learnings on the fly. There are many other major limitations of the current way AI is done, which we will look at later.
     \item Look at AI-12.ipynb to implement a model that can read handwritten digits. 
 \end{itemize}
